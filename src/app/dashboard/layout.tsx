@@ -2,12 +2,14 @@ import KBar from '@/shared/kbar';
 import { Header } from '@/widgets/header';
 import { AppSidebarClient } from '@/widgets/sidebar';
 import { SidebarInset, SidebarProvider } from '@/shared/ui/sidebar';
+import { InfobarProvider } from '@/shared/ui/infobar';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
-  title: 'Next Shadcn Dashboard Starter',
-  description: 'Basic dashboard with Next.js and Shadcn'
+  title: 'Linear Style Dashboard',
+  description:
+    'Next.js Dashboard Boilerplate with Shadcn UI and FSD Architecture'
 };
 
 export default async function DashboardLayout({
@@ -24,9 +26,7 @@ export default async function DashboardLayout({
         <AppSidebarClient />
         <SidebarInset>
           <Header />
-          {/* page main content */}
-          {children}
-          {/* page main content ends */}
+          <InfobarProvider>{children}</InfobarProvider>
         </SidebarInset>
       </SidebarProvider>
     </KBar>
