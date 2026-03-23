@@ -1,0 +1,92 @@
+body {
+  overscroll-behavior: none;
+  background-color: hsl(var(--background));
+}
+
+:root {
+  --font-sans: var(--font-inter);
+  --header-height: 3.5rem;
+}
+
+/* Base Theme - Linear Default */
+.theme-default,
+.theme-default-scaled {
+  --primary: 248 55% 65%; /* Linear Purple */
+  --primary-foreground: 0 0% 100%;
+
+  @variant dark {
+    --primary: 248 55% 65%;
+    --primary-foreground: 0 0% 100%;
+  }
+}
+
+/* Blue Theme */
+.theme-blue,
+.theme-blue-scaled {
+  --primary: 221 83% 53%;
+  --primary-foreground: 210 40% 98%;
+
+  @variant dark {
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+  }
+}
+
+/* Green Theme */
+.theme-green,
+.theme-green-scaled {
+  --primary: 142 76% 36%;
+  --primary-foreground: 355.7 100% 97.3%;
+
+  @variant dark {
+    --primary: 142 70% 50%;
+    --primary-foreground: 144.9 80.4% 10%;
+  }
+}
+
+/* Amber Theme */
+.theme-amber,
+.theme-amber-scaled {
+  --primary: 32 95% 44%;
+  --primary-foreground: 0 0% 100%;
+
+  @variant dark {
+    --primary: 32 100% 50%;
+    --primary-foreground: 20 14.3% 4.1%;
+  }
+}
+
+/* Mono Theme */
+.theme-mono,
+.theme-mono-scaled {
+  --font-sans: var(--font-mono);
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+
+  @variant dark {
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+  }
+
+  .rounded-xs,
+  .rounded-sm,
+  .rounded-md,
+  .rounded-lg,
+  .rounded-xl {
+    @apply !rounded-none;
+    border-radius: 0;
+  }
+}
+
+/* Scaling utilities */
+.theme-scaled,
+.theme-default-scaled,
+.theme-blue-scaled,
+.theme-green-scaled,
+.theme-amber-scaled,
+.theme-mono-scaled {
+  @media (min-width: 1024px) {
+    --radius: 0.6rem;
+    font-size: 0.95rem;
+  }
+}
