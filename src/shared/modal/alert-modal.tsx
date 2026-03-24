@@ -1,5 +1,4 @@
 'use client';
-import { useEffect, useState } from 'react';
 import { Button } from '@/shared/ui/button';
 import { Modal } from '@/shared/ui/modal';
 
@@ -20,16 +19,6 @@ export const AlertModal: React.FC<AlertModalProps> = ({
   title = 'Are you sure?',
   description = 'This action cannot be undone.'
 }) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
-  }
-
   return (
     <Modal
       title={title}

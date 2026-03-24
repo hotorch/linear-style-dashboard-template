@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { cn } from '@/shared/lib/utils';
 
 interface StaggerGroupProps {
   children: React.ReactNode;
@@ -28,20 +27,32 @@ export function StaggerGroup({
 
   return (
     <div className={className}>
-      {items.map((child, index) => (
-        <motion.div
-          key={React.isValidElement(child) ? child.key : index}
-          initial={{ opacity: 0, y: initialY }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration,
-            delay: index * staggerDelay,
-            ease: [0.21, 0.47, 0.32, 0.98]
-          }}
-        >
-          {child}
-        </motion.div>
-      ))}
+      {items.map((child, index) => {
+        // Forward child's className to motion.div so grid/flex item classes work
+        const childClassName = React.isValidElement<{ className?: string }>(
+          child
+        )
+          ? child.props.className
+          : undefined;
+
+        return (
+          <motion.div
+            key={React.isValidElement(child) ? child.key : index}
+            className={childClassName}
+            initial={{ opacity: 0, y: initialY }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration,
+              delay: index * staggerDelay,
+              ease: [0.21, 0.47, 0.32, 0.98]
+            }}
+          >
+            {React.isValidElement<{ className?: string }>(child)
+              ? React.cloneElement(child, { className: undefined })
+              : child}
+          </motion.div>
+        );
+      })}
     </div>
   );
 }

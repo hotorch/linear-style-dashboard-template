@@ -1,19 +1,27 @@
 import React from 'react';
 import { ScrollArea } from '@/shared/ui/scroll-area';
 import { Heading } from '@/shared/ui/heading';
+import { Skeleton } from '@/shared/ui/skeleton';
 import type { InfobarContent } from '@/shared/ui/infobar';
 
 function PageSkeleton() {
   return (
-    <div className='flex flex-1 animate-pulse flex-col gap-4 p-4 md:px-6'>
+    <div className='flex flex-1 flex-col gap-4 p-4 md:px-6'>
       <div className='flex items-center justify-between'>
         <div>
-          <div className='bg-muted mb-2 h-8 w-48 rounded' />
-          <div className='bg-muted h-4 w-96 rounded' />
+          <Skeleton className='mb-2 h-8 w-48' />
+          <Skeleton className='h-4 w-72' />
         </div>
       </div>
-      <div className='bg-muted mt-6 h-40 w-full rounded-lg' />
-      <div className='bg-muted h-40 w-full rounded-lg' />
+      <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
+        {Array.from({ length: 4 }).map((_, i) => (
+          <Skeleton key={i} className='h-32 rounded-xl' />
+        ))}
+      </div>
+      <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7'>
+        <Skeleton className='col-span-4 h-[350px] rounded-xl' />
+        <Skeleton className='col-span-3 h-[350px] rounded-xl' />
+      </div>
     </div>
   );
 }
@@ -55,7 +63,7 @@ export default function PageContainer({
 
   return scrollable ? (
     <ScrollArea className='h-[calc(100dvh-52px)]'>
-      <div className='flex flex-1 flex-col p-4 md:px-6'>
+      <div className='dark:bg-dot-pattern flex flex-1 flex-col p-4 md:px-6'>
         <div className='mb-4 flex items-start justify-between'>
           <Heading
             title={pageTitle ?? ''}
@@ -68,7 +76,7 @@ export default function PageContainer({
       </div>
     </ScrollArea>
   ) : (
-    <div className='flex min-w-0 flex-1 flex-col p-4 md:px-6'>
+    <div className='dark:bg-dot-pattern flex min-w-0 flex-1 flex-col p-4 md:px-6'>
       <div className='mb-4 flex items-start justify-between'>
         <Heading
           title={pageTitle ?? ''}

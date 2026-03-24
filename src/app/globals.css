@@ -199,6 +199,56 @@
   animation: reveal 0.4s ease-in-out forwards;
 }
 
+/* Typography utilities */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    letter-spacing: -0.02em;
+  }
+  .font-kpi {
+    font-family: var(--font-kpi), monospace;
+    font-feature-settings: 'tnum' 1;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Dark mode dot grid background pattern */
+.bg-dot-pattern {
+  background-image: radial-gradient(
+    circle,
+    hsl(var(--foreground) / 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+/* Sidebar edge glow (decorative) */
+.sidebar-glow {
+  position: fixed;
+  left: var(--sidebar-width, 16rem);
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  background: radial-gradient(
+    ellipse at left,
+    hsl(var(--primary) / 0.04) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  transition: left 200ms ease-linear;
+}
+
+/* Shimmer Skeleton Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 /* Indeterminate Progress Bar Animation */
 @keyframes progress-indeterminate {
   0% {

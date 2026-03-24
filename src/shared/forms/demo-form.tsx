@@ -112,6 +112,7 @@ export default function DemoForm() {
   });
 
   const onSubmit = (data: DemoFormData) => {
+    // eslint-disable-next-line no-console -- demo form intentional logging
     console.log('Form submitted:', data);
     alert('Form submitted successfully! Check console for data.');
   };
@@ -294,6 +295,7 @@ export default function DemoForm() {
         </CardHeader>
         <CardContent>
           <pre className='bg-muted overflow-auto rounded-lg p-4 text-sm'>
+            {/* eslint-disable-next-line react-hooks/incompatible-library -- demo preview */}
             {JSON.stringify(form.watch(), null, 2)}
           </pre>
         </CardContent>

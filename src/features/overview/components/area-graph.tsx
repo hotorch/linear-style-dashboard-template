@@ -88,7 +88,12 @@ export function AreaGraph() {
                 />
               </linearGradient>
             </defs>
-            <CartesianGrid vertical={false} />
+            <CartesianGrid
+              vertical={false}
+              strokeDasharray='3 3'
+              stroke='hsl(var(--border))'
+              strokeOpacity={0.4}
+            />
             <XAxis
               dataKey='month'
               tickLine={false}
@@ -107,6 +112,8 @@ export function AreaGraph() {
               fill='url(#fillMobile)'
               stroke='var(--color-mobile)'
               stackId='a'
+              animationDuration={1000}
+              animationEasing='ease-out'
             />
             <Area
               dataKey='desktop'
@@ -114,6 +121,8 @@ export function AreaGraph() {
               fill='url(#fillDesktop)'
               stroke='var(--color-desktop)'
               stackId='a'
+              animationDuration={1000}
+              animationEasing='ease-out'
             />
           </AreaChart>
         </ChartContainer>

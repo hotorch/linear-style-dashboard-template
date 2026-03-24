@@ -24,14 +24,8 @@ export function BarGraphSkeleton() {
       <CardContent className='px-2 sm:p-6'>
         {/* Bar-like shapes */}
         <div className='flex aspect-auto h-[280px] w-full items-end justify-around gap-2 pt-8'>
-          {Array.from({ length: 12 }).map((_, i) => (
-            <Skeleton
-              key={i}
-              className='w-full'
-              style={{
-                height: `${Math.max(20, Math.random() * 100)}%`
-              }}
-            />
+          {[65, 42, 88, 35, 73, 51, 94, 28, 60, 47, 82, 38].map((h, i) => (
+            <Skeleton key={i} className='w-full' style={{ height: `${h}%` }} />
           ))}
         </div>
       </CardContent>

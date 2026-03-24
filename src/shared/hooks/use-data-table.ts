@@ -259,6 +259,7 @@ export function useDataTable<TData>(props: UseDataTableProps<TData>) {
     [debouncedSetFilterValues, filterableColumns, enableAdvancedFilter]
   );
 
+  // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Table returns mutable refs by design
   const table = useReactTable({
     ...tableProps,
     columns,

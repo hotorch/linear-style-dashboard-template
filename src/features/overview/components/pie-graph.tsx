@@ -114,6 +114,8 @@ export function PieGraph() {
               innerRadius={60}
               strokeWidth={2}
               stroke='var(--background)'
+              animationDuration={800}
+              animationBegin={200}
             >
               <Label
                 content={({ viewBox }) => {

@@ -15,14 +15,4 @@ export class DashboardPage extends BasePage {
   get sidebarTrigger(): Locator {
     return this.page.getByRole('button', { name: /toggle sidebar/i });
   }
-
-  async navigateToProduct(): Promise<void> {
-    await this.page.getByRole('link', { name: 'Product' }).click();
-    await this.page.waitForURL('**/dashboard/product');
-  }
-
-  async navigateToKanban(): Promise<void> {
-    await this.page.getByRole('link', { name: 'Kanban' }).click();
-    await this.page.waitForURL('**/dashboard/kanban');
-  }
 }

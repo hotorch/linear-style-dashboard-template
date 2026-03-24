@@ -6,8 +6,7 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage
+  FormLabel
 } from '@/shared/ui/form';
 import { Switch } from '@/shared/ui/switch';
 import { BaseFormFieldProps } from '@/shared/types/base-form';

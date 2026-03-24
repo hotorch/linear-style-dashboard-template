@@ -219,7 +219,12 @@ export function BarGraph() {
                 />
               </linearGradient>
             </defs>
-            <CartesianGrid vertical={false} />
+            <CartesianGrid
+              vertical={false}
+              strokeDasharray='3 3'
+              stroke='hsl(var(--border))'
+              strokeOpacity={0.4}
+            />
             <XAxis
               dataKey='date'
               tickLine={false}
@@ -256,6 +261,8 @@ export function BarGraph() {
               dataKey={activeChart}
               fill='url(#fillBar)'
               radius={[4, 4, 0, 0]}
+              animationDuration={800}
+              animationEasing='ease-out'
             />
           </BarChart>
         </ChartContainer>

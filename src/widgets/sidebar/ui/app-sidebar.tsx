@@ -7,6 +7,7 @@ import {
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarHeader,
@@ -28,6 +29,7 @@ import { usePathname } from 'next/navigation';
 import * as React from 'react';
 import { Icons } from '@/shared/ui/icons';
 import { OrgSwitcher } from './org-switcher';
+import { SidebarUserFooter } from './sidebar-user-footer';
 
 function SidebarActiveIndicator() {
   return (
@@ -131,6 +133,9 @@ export default function AppSidebar() {
           </LayoutGroup>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarUserFooter />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

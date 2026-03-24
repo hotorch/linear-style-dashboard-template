@@ -19,3 +19,6 @@ export { PieGraphSkeleton } from './pie-graph-skeleton';
 export { default as Overview } from './overview';
 export { RecentSales } from './recent-sales';
 export { RecentSalesSkeleton } from './recent-sales-skeleton';
+export { ChartGrid } from './chart-grid';
+export { Greeting } from './greeting';
+export { StatCards } from './stat-cards';

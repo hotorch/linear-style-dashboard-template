@@ -4,7 +4,6 @@ import {
   IconCircleCheck,
   IconBell,
   IconChevronsDown,
-  IconCreditCard,
   IconLogout,
   IconSparkles
 } from '@tabler/icons-react';
@@ -87,10 +86,6 @@ export function NavUser({
               <DropdownMenuItem>
                 <IconCircleCheck className='mr-2 h-4 w-4' />
                 Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconCreditCard className='mr-2 h-4 w-4' />
-                Billing
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <IconBell className='mr-2 h-4 w-4' />

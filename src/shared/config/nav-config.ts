@@ -10,19 +10,19 @@ export const navItems: NavItem[] = [
     items: []
   },
   {
-    title: 'Product',
-    url: '/dashboard/product',
-    icon: 'product',
-    shortcut: ['p', 'p'],
+    title: 'Exclusive',
+    url: '/dashboard/exclusive',
+    icon: 'exclusive',
     isActive: false,
+    shortcut: ['e', 'e'],
     items: []
   },
   {
-    title: 'Kanban',
-    url: '/dashboard/kanban',
-    icon: 'kanban',
-    shortcut: ['k', 'k'],
+    title: 'Workspaces',
+    url: '/dashboard/workspaces',
+    icon: 'workspace',
     isActive: false,
+    shortcut: ['w', 'w'],
     items: []
   },
   {
@@ -36,12 +36,6 @@ export const navItems: NavItem[] = [
         url: '/dashboard/profile',
         icon: 'profile',
         shortcut: ['m', 'm']
-      },
-      {
-        title: 'Billing',
-        url: '/dashboard/billing',
-        icon: 'billing',
-        shortcut: ['b', 'b']
       }
     ]
   }

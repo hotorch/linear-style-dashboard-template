@@ -15,18 +15,6 @@ test.describe('Dashboard Navigation', () => {
     await expect(dashboardPage.sidebar).toBeVisible();
   });
 
-  test('should navigate to Product page', async ({ page }) => {
-    await dashboardPage.navigateToProduct();
-
-    await expect(page).toHaveURL(/.*dashboard\/product/);
-  });
-
-  test('should navigate to Kanban page', async ({ page }) => {
-    await dashboardPage.navigateToKanban();
-
-    await expect(page).toHaveURL(/.*dashboard\/kanban/);
-  });
-
   test('should toggle sidebar', async () => {
     const sidebar = dashboardPage.sidebar;
 

@@ -43,16 +43,18 @@ function getFormatter(formatType?: FormatType): (n: number) => string {
 interface AnimatedNumberProps {
   value: number;
   formatType?: FormatType;
+  formatter?: (n: number) => string;
   className?: string;
 }
 
 export function AnimatedNumber({
   value,
   formatType,
+  formatter: customFormatter,
   className
 }: AnimatedNumberProps) {
   const prefersReducedMotion = useReducedMotion();
-  const formatter = getFormatter(formatType);
+  const formatter = customFormatter ?? getFormatter(formatType);
   const motionValue = useMotionValue(0);
   const spring = useSpring(motionValue, { stiffness: 100, damping: 30 });
   const display = useTransform(spring, formatter);

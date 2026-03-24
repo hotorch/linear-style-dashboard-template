@@ -25,8 +25,6 @@ import { CircleXIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 
-const INFOBAR_COOKIE_NAME = 'infobar_state';
-const INFOBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const INFOBAR_WIDTH = '22rem';
 const INFOBAR_WIDTH_MOBILE = '22rem';
 const INFOBAR_WIDTH_ICON = '3rem';
@@ -155,6 +153,7 @@ function InfobarProvider({
         setIsPathnameChanging(false);
       }, 200);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- setOpen is a stable setter
   }, [pathname, contentPathname]);
 
   // Update setContent to also track pathname
@@ -685,10 +684,9 @@ function InfobarMenuSkeleton({
 }: React.ComponentProps<'div'> & {
   showIcon?: boolean;
 }) {
-  // Random width between 50 to 90%.
-  const width = React.useMemo(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`;
-  }, []);
+  // Deterministic width based on component identity.
+  const width = React.useId();
+  const widthPercent = `${(width.charCodeAt(1) % 40) + 50}%`;
 
   return (
     <div
@@ -708,7 +706,7 @@ function InfobarMenuSkeleton({
         data-infobar='menu-skeleton-text'
         style={
           {
-            '--skeleton-width': width
+            '--skeleton-width': widthPercent
           } as React.CSSProperties
         }
       />
