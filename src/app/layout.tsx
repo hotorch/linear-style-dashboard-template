@@ -1,6 +1,7 @@
 import { fontVariables } from '@/shared/lib/font';
 import { cn } from '@/shared/lib/utils';
 import { cookies } from 'next/headers';
+import Script from 'next/script';
 import NextTopLoader from 'nextjs-toploader';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { ThemeProvider } from '@/widgets/theme-toggle';
@@ -14,6 +15,8 @@ const META_THEME_COLORS = {
   light: '#ffffff',
   dark: '#0B0C0E'
 };
+
+const THEME_INIT_SCRIPT = `(function(){try{var e=document.documentElement,t=localStorage.getItem("theme")||"dark",s=t==="system"?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":t;e.classList.remove("light","dark");e.classList.add(s);if(s==="light"||s==="dark")e.style.colorScheme=s;if(t==="dark"||((!("theme" in localStorage)||t==="system")&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.querySelector('meta[name="theme-color"]')?.setAttribute("content","${META_THEME_COLORS.dark}")}else{document.querySelector('meta[name="theme-color"]')?.setAttribute("content","${META_THEME_COLORS.light}")}}catch(e){}})()`;
 
 export const metadata = {
   title: 'Linear Style Dashboard',
@@ -37,16 +40,10 @@ export default async function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
-                }
-              } catch (_) {}
-            `
-          }}
+        <Script
+          id='theme-init'
+          strategy='beforeInteractive'
+          dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
         />
       </head>
       <body
@@ -65,6 +62,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
             enableColorScheme
+            scriptProps={{ type: 'text/plain' }}
           >
             <Providers activeThemeValue={activeThemeValue as string}>
               <Toaster />
