@@ -1,8 +1,8 @@
 <p align="center">
-<h1 align="center">Next.js Dashboard Starter Template</h1>
+<h1 align="center">Linear Style Dashboard Template</h1>
 
 <div align="center">
-  Production-ready admin dashboard built with Next.js 16, Shadcn UI, Tailwind CSS v4, and Feature-Sliced Design architecture
+  Next.js 16 + Shadcn UI + Tailwind CSS v4 + FSD 아키텍처 기반 대시보드 보일러플레이트
 </div>
 
 <br />
@@ -11,326 +11,146 @@
   <img src="/public/shadcn-dashboard.png" alt="Dashboard Preview" style="max-width: 100%; border-radius: 8px;" />
 </div>
 
-## Overview
+## 소개
 
-A **production-ready admin dashboard template** built with modern technologies and best practices. Perfect for **SaaS applications**, **internal tools**, and **admin panels**.
+디자인 고민 없이 바로 개인 대시보드를 만들 수 있는 **시작 템플릿**입니다.
+YouTube 분석, Instagram 분석 등 원하는 데이터 대시보드를 이 위에 구축하세요.
 
-### Key Highlights
+- **Feature-Sliced Design (FSD)** 아키텍처로 확장 가능한 구조
+- **5가지 테마** (Purple, Blue, Green, Amber, Mono) + 다크/라이트 모드
+- **61개 Shadcn UI 컴포넌트** 사전 설치
+- **Cmd+K 커맨드 팔레트**, 페이지 트랜지션, 애니메이션 숫자 등 UX 기능 내장
 
-- **Feature-Sliced Design (FSD)** architecture for scalable, maintainable code
-- **Next.js 16** with App Router and Turbopack
-- **Supabase** ready for backend (database, auth)
-- **Internationalization** with next-intl (English, Korean)
-- **E2E Testing** with Playwright
-- **Email Service** with Resend + React Email
+## 기술 스택
 
-## Tech Stack
+| 카테고리 | 기술 |
+|----------|------|
+| 프레임워크 | [Next.js 16](https://nextjs.org) (App Router, Turbopack) |
+| 언어 | [TypeScript](https://www.typescriptlang.org) |
+| 스타일링 | [Tailwind CSS v4](https://tailwindcss.com) |
+| UI 컴포넌트 | [Shadcn UI](https://ui.shadcn.com) (61개) |
+| URL 상태관리 | [Nuqs](https://nuqs.47ng.com) |
+| 폼 | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) |
+| 테이블 | [TanStack React Table](https://tanstack.com/table) |
+| 차트 | [Recharts](https://recharts.org) |
+| 커맨드 팔레트 | [kbar](https://kbar.vercel.app) (Cmd+K) |
+| 애니메이션 | [motion](https://motion.dev) |
+| 테마 | [next-themes](https://github.com/pacocoursey/next-themes) |
+| 토스트 | [Sonner](https://sonner.emilkowal.dev) |
+| 테스트 | [Playwright](https://playwright.dev) (E2E) |
+| 코드 품질 | ESLint + Prettier + Husky |
 
-| Category | Technology |
-|----------|------------|
-| Framework | [Next.js 16](https://nextjs.org) (App Router, Turbopack) |
-| Language | [TypeScript](https://www.typescriptlang.org) |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com) |
-| UI Components | [Shadcn UI](https://ui.shadcn.com) |
-| Backend | [Supabase](https://supabase.com) |
-| Email | [Resend](https://resend.com) + [React Email](https://react.email) |
-| i18n | [next-intl](https://next-intl-docs.vercel.app) |
-| State Management | [Zustand](https://zustand-demo.pmnd.rs) |
-| URL State | [Nuqs](https://nuqs.47ng.com) |
-| Forms | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) |
-| Tables | [TanStack Table](https://tanstack.com/table) |
-| Testing | [Playwright](https://playwright.dev) |
-| Command Palette | [kbar](https://kbar.vercel.app) |
-| Error Tracking | [Sentry](https://sentry.io) |
-| Linting | ESLint + Prettier |
-| Git Hooks | Husky |
+## 페이지 구성
 
-## Features
+| 페이지 | 경로 | 설명 |
+|--------|------|------|
+| Overview | `/dashboard/overview` | 차트 대시보드 (Suspense 스트리밍) |
+| Exclusive | `/dashboard/exclusive` | Exclusive 페이지 |
+| Profile | `/dashboard/profile` | 프로필 설정 폼 |
+| Workspaces | `/dashboard/workspaces` | 워크스페이스 관리 |
+| Team | `/dashboard/workspaces/team` | 팀 관리 (워크스페이스 하위) |
 
-### Core Features
+루트 `/` 접속 시 `/dashboard/overview`로 리다이렉트됩니다.
 
-- **Admin Dashboard Layout** - Pre-built sidebar, header, and content area
-- **Analytics Overview** - Cards and charts with Recharts
-- **Data Tables** - Server-side search, filter, and pagination
-- **Kanban Board** - Drag & drop task management with dnd-kit
-- **Forms** - React Hook Form with Zod validation
-- **Command Palette** - Cmd+K navigation interface
-
-### Architecture & Developer Experience
-
-- **Feature-Sliced Design** - Scalable folder structure with clear boundaries
-- **Internationalization** - Multi-language support (EN, KO)
-- **Theme System** - Light/dark mode with CSS variables
-- **E2E Testing** - Playwright test suite
-- **Email Templates** - React Email components
-
-### Navigation & Access Control
-
-- **RBAC Navigation** - Client-side filtering based on roles/permissions
-- **Infobar Component** - Contextual tips and status messages
-- **Breadcrumbs** - Dynamic route-based breadcrumbs
-
-## Project Structure (FSD)
+## 프로젝트 구조 (FSD)
 
 ```
 src/
-├── app/                    # Next.js App Router
-│   ├── [locale]/           # i18n routes
-│   │   ├── dashboard/      # Dashboard pages
-│   │   └── auth/           # Auth pages
-│   └── api/                # API routes
-│
-├── widgets/                # Independent UI blocks
-│   ├── header/             # Header, breadcrumbs, search
-│   ├── sidebar/            # Navigation sidebar
-│   ├── app-shell/          # Page container
-│   └── theme-toggle/       # Theme switcher
-│
-├── features/               # User interactions & business logic
-│   └── [feature]/
-│       ├── ui/
-│       ├── model/
-│       └── index.ts
-│
-├── entities/               # Business domain objects
-│   └── [entity]/
-│       ├── model/
-│       └── index.ts
-│
-├── shared/                 # Shared resources
-│   ├── ui/                 # Shadcn components
-│   ├── lib/                # Utilities, Supabase, Email
-│   ├── hooks/              # Custom hooks
-│   ├── config/             # App configuration
-│   └── types/              # TypeScript types
-│
-├── i18n/                   # i18n configuration
-└── messages/               # Translation files (en.json, ko.json)
+├── app/              # Next.js App Router, 라우팅, 글로벌 스타일
+├── widgets/          # 독립 UI 블록 (header, sidebar, app-shell, theme-toggle)
+├── features/         # 사용자 인터랙션 (overview, profile)
+└── shared/           # 공용 유틸리티, UI 컴포넌트, 설정
+    ├── ui/           # 61개 Shadcn 컴포넌트 + 커스텀 UI
+    ├── ui/table/     # TanStack Table 보일러플레이트
+    ├── lib/          # cn(), 폰트, 포매터, Nuqs 설정
+    ├── forms/        # 폼 필드 컴포넌트
+    ├── hooks/        # 커스텀 훅 (11개)
+    ├── config/       # 네비게이션 설정, mock API
+    ├── kbar/         # 커맨드 팔레트
+    ├── types/        # TypeScript 타입 정의
+    └── modal/        # 모달 유틸리티
 ```
 
-### FSD Import Rules
+### FSD 의존성 규칙
 
-| Layer | Can Import From |
-|-------|-----------------|
-| app | widgets, features, entities, shared |
-| widgets | features, entities, shared |
-| features | entities, shared |
-| entities | shared |
-| shared | (no dependencies) |
+```
+app/ → widgets/ → features/ → shared/
+```
 
-## Pages
+상위 레이어만 하위 레이어를 import 할 수 있습니다. 역방향 및 같은 레이어 간 import는 금지됩니다.
 
-| Page | Description |
-|------|-------------|
-| **Dashboard Overview** | Analytics cards with Recharts, parallel routes for independent loading |
-| **Product List** | TanStack table with server-side search, filter, pagination |
-| **Product Form** | React Hook Form + Zod validation |
-| **Kanban Board** | Drag & drop task management with Zustand persistence |
-| **Profile** | User profile management |
-| **Workspaces** | Organization/workspace management |
-| **Team Management** | Team members and roles (requires org context) |
-| **Billing** | Subscription management (requires org context) |
+## 시작하기
 
-## Getting Started
-
-### Prerequisites
+### 사전 요구사항
 
 - Node.js 18+
-- npm or bun
+- npm
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/hotorch/hottman-style-dashboard-template.git
-   cd hottman-style-dashboard-template
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   bun install
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   cp env.example.txt .env.local
-   ```
-
-4. **Configure environment variables**
-   ```env
-   # Supabase
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-
-   # Email (Resend)
-   RESEND_API_KEY=re_xxxxxxxxxxxxx
-   EMAIL_FROM="App <noreply@yourdomain.com>"
-
-   # Sentry (optional)
-   SENTRY_DSN=your_sentry_dsn
-   ```
-
-5. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-6. **Open** [http://localhost:3000](http://localhost:3000)
-
-## Scripts
+### 설치
 
 ```bash
-# Development
-npm run dev           # Start dev server
-npm run build         # Production build
-npm run start         # Start production server
-
-# Code Quality
-npm run lint          # Run ESLint
-npm run lint:fix      # Fix ESLint errors + Prettier
-npm run format        # Run Prettier
-
-# Testing
-npm run test:e2e      # Run Playwright tests
-npm run test:e2e:ui   # Playwright UI mode
-npm run test:e2e:debug # Debug mode
-
-# Email
-npm run email:dev     # React Email dev server
+git clone https://github.com/hotorch/linear-style-dashboard-template.git
+cd linear-style-dashboard-template
+npm install
+npm run dev
 ```
 
-## Backend Setup
+[http://localhost:3000](http://localhost:3000) 에서 확인하세요.
 
-### Supabase
-
-1. Create a project at [supabase.com](https://supabase.com)
-2. Get your project URL and anon key from Settings > API
-3. Add to `.env.local`:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-   ```
-
-### Email (Resend)
-
-1. Create an account at [resend.com](https://resend.com)
-2. Get your API key
-3. Add to `.env.local`:
-   ```env
-   RESEND_API_KEY=re_xxxxxxxxxxxxx
-   EMAIL_FROM="App <noreply@yourdomain.com>"
-   ```
-
-## Adding Features
-
-### New Feature (FSD Pattern)
-
-1. Create feature directory:
-   ```
-   src/features/my-feature/
-   ├── ui/
-   │   ├── MyComponent.tsx
-   │   └── index.ts
-   ├── model/
-   │   ├── use-my-feature.ts
-   │   └── index.ts
-   └── index.ts
-   ```
-
-2. Export public API:
-   ```typescript
-   // features/my-feature/index.ts
-   export { MyComponent } from './ui';
-   export { useMyFeature } from './model';
-   ```
-
-3. Create route:
-   ```
-   src/app/[locale]/dashboard/my-feature/page.tsx
-   ```
-
-4. Add to navigation:
-   ```typescript
-   // src/shared/config/nav-config.ts
-   {
-     title: 'My Feature',
-     url: '/dashboard/my-feature',
-     icon: 'myIcon',
-   }
-   ```
-
-### New Shadcn Component
+## 스크립트
 
 ```bash
-npx shadcn@latest add button
+npm run dev              # 개발 서버 시작 (포트 3000)
+npm run build            # 프로덕션 빌드
+npm run lint             # ESLint 실행
+npm run lint:fix         # ESLint 수정 + Prettier
+npm run lint:strict      # 경고 0 허용 ESLint
+npm run format           # Prettier 실행
+npm run test:e2e         # Playwright E2E 테스트
+npm run test:e2e:ui      # E2E 테스트 UI 모드
 ```
 
-Components are installed to `src/shared/ui/`.
+**Git Hooks**: 커밋 시 lint-staged 자동 실행, 푸시 시 빌드 체크 (Husky).
 
-## Internationalization
+## 커스터마이징
 
-Supported locales: `en` (default), `ko`
+### 테마 변경
 
-### Adding Translations
+`src/app/globals.css`와 `src/app/theme.css`에서 CSS 변수를 수정하세요.
+5가지 프리셋 (Purple, Blue, Green, Amber, Mono) 중 선택하거나 커스텀 테마를 만들 수 있습니다.
 
-1. Edit `src/messages/en.json` and `src/messages/ko.json`
-2. Use translations in components:
-   ```typescript
-   import { useTranslations } from 'next-intl';
+### 네비게이션 추가
 
-   function MyComponent() {
-     const t = useTranslations('MyNamespace');
-     return <h1>{t('title')}</h1>;
-   }
-   ```
-
-## Testing
-
-### Run E2E Tests
-
-```bash
-# Install browsers (first time)
-npx playwright install
-
-# Run tests
-npm run test:e2e
-
-# UI mode
-npm run test:e2e:ui
-```
-
-### Test Structure
-
-```
-e2e/
-├── pages/              # Page Object Models
-│   ├── base.page.ts
-│   └── dashboard.page.ts
-├── auth.spec.ts
-├── navigation.spec.ts
-└── dashboard.spec.ts
-```
-
-## Customization
-
-### Theme
-
-Edit CSS variables in `src/app/globals.css` and `src/app/theme.css`.
-
-### Navigation
-
-Configure in `src/shared/config/nav-config.ts`:
+`src/shared/config/nav-config.ts`에서 설정:
 
 ```typescript
 {
-  title: 'Dashboard',
-  url: '/dashboard/overview',
-  icon: 'dashboard',
-  access: { requireOrg: true }, // Optional RBAC
+  title: 'My Page',
+  url: '/dashboard/my-page',
+  icon: 'myIcon',
+  shortcut: ['m', 'p']
 }
 ```
+
+### Shadcn 컴포넌트 추가
+
+```bash
+npx shadcn@latest add <component>
+```
+
+`src/shared/ui/`에 설치됩니다.
+
+## 테스트
+
+```bash
+# 브라우저 설치 (최초 1회)
+npx playwright install
+
+# 테스트 실행
+npm run test:e2e
+```
+
+테스트 파일: `/e2e/` 디렉토리 (Page Object 패턴 사용)
 
 ## Author
 
@@ -342,10 +162,3 @@ Configure in `src/shared/config/nav-config.ts`:
 ## License
 
 MIT
-
-## Acknowledgements
-
-- [Shadcn UI](https://ui.shadcn.com) for the beautiful components
-- [Next.js](https://nextjs.org) for the framework
-- [Tailwind CSS](https://tailwindcss.com) for styling
-- [Feature-Sliced Design](https://feature-sliced.design) for architecture patterns
