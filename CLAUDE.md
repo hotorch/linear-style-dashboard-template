@@ -29,7 +29,7 @@ npm run test:e2e:ui      # Run E2E tests with UI
 npx shadcn@latest add <component>       # Components install to src/shared/ui/
 ```
 
-**Pre-commit hooks**: Husky + lint-staged runs automatically on `git commit`.
+**Git hooks (Husky)**: Pre-commit (lint-staged), Pre-push (build check).
 
 ## Tech Stack
 
@@ -53,7 +53,7 @@ src/
 ├── app/           # Next.js App Router, global styles, routing
 ├── widgets/       # Independent UI blocks (header, sidebar, app-shell, theme-toggle)
 ├── features/      # User interactions — overview, profile
-├── entities/      # Core business domain objects (empty in template)
+├── entities/      # Domain objects (create when needed, does not exist yet)
 └── shared/        # Reusable utilities, UI (61 Shadcn components), configs
 ```
 
@@ -72,7 +72,7 @@ src/
 ### Routes
 
 All routes under `src/app/dashboard/`:
-- **`/dashboard/overview`** — Charts dashboard (parallel routes: @area_stats, @bar_stats, @pie_stats, @sales)
+- **`/dashboard/overview`** — Charts dashboard (Suspense streaming with async server components)
 - **`/dashboard/exclusive`** — Exclusive page
 - **`/dashboard/profile`** — Profile settings (catch-all `[[...profile]]`)
 - **`/dashboard/workspaces`** — Workspaces page (nested `/team`)
@@ -101,9 +101,9 @@ Root `/` redirects to `/dashboard/overview`.
 |-----------|---------|
 | `ui/` | 61 Shadcn components + custom UI (animated-number, stagger-group, etc.) |
 | `ui/table/` | TanStack React Table boilerplate (data-table, filters, pagination) |
-| `lib/` | `cn()`, fonts, formatters, data-table helpers, URL search params (Nuqs) |
+| `lib/` | `cn()`, fonts, formatters, data-table helpers, URL search params (Nuqs), `hooks/` sub-dir |
 | `forms/` | Form field components (input, select, checkbox, date-picker, etc.) |
-| `hooks/` | `use-breadcrumbs`, `use-media-query`, `use-data-table` |
+| `hooks/` | Custom hooks (11 hooks: data-table, breadcrumbs, media-query, nav, mobile, debounce, etc.) |
 | `config/` | Navigation config, mock API, app info |
 | `kbar/` | Command palette integration |
 | `types/` | Shared TypeScript type definitions |
@@ -113,85 +113,23 @@ Root `/` redirects to `/dashboard/overview`.
 
 ## Development Guidelines
 
-### Next.js Patterns
+> Coding rules, forbidden patterns, path aliases, and hydration patterns → `.claude/rules/coding-standards.md`
+> Code placement decision tree → `.claude/rules/fsd-architecture.md`
+> Commit messages and verification checklist → `.claude/rules/git-workflow.md`
 
-- Always use `'use client'` directive when client interactivity is needed
-- Always use Promise for page.tsx params props (Next.js 15+ pattern)
+### Testing
 
-### Hydration-Safe Pattern (Radix UI)
-
-```typescript
-'use client';
-import dynamic from 'next/dynamic';
-export const MyComponent = dynamic(
-  () => import('./my-component').then((mod) => mod.default),
-  { ssr: false }
-);
-```
-
-### Path Aliases
-
-- `@/*` → `./src/*`, `~/*` → `./public/*`
-
-### Coding Rules
-
-- Choose the **simplest implementation** possible
-- Do **not** add features that were not requested
-- Type annotations on all public APIs
-- Star export/import is **forbidden**
-- File names: `kebab-case` / Classes: `PascalCase` / Functions: `camelCase` / Constants: `UPPER_SNAKE_CASE`
-
-### Forbidden Patterns
-
-- `utils/`, `helpers/`, `common/` folders outside `shared/`
-- Relative paths (`../../`) to bypass layer rules
-- Business logic in `shared/`
-- Circular dependencies between slices
-- Importing slice internals (bypassing `index.ts`)
-- Domain model importing framework code directly
-
-### Code Placement Decision Tree
-
-1. Pure utility with no business logic? → `shared/`
-2. Rule of a specific domain model? → `entities/[domain]/`
-3. Feature reused across multiple pages? → `features/[action]/`
-4. Used only in a specific page? → `app/dashboard/[page]/`
-
-Start in the narrowest scope. Only move to a lower layer when reuse scope widens.
-
-### External API/Library Usage
-
-When using external APIs or third-party libraries, **search official docs first** before writing code. Never rely on memory alone. Priority: Official docs > GitHub README > Official blog.
-
-### Commit Messages
-
-```
-[layer/slice] concise description
-
-Examples:
-features/create-order: implement order creation API
-entities/user: add email validation Value Object
-shared/api: configure HTTP client timeout
-```
+- E2E tests: `/e2e/` directory with Page Object pattern (`e2e/pages/`)
+- Config: `playwright.config.ts` at project root
 
 ---
 
 ## Adding New Features
 
-1. **Write SPEC first** (`/sdd`) — Create `specs/[SPEC-ID]/` with spec, plan, acceptance docs.
+1. **Write SPEC first** (`/sdd`) — Create `specs/[SPEC-ID]/` directory (if not exists) with spec, plan, acceptance docs.
 2. **Create feature slice** (`/fsd`) — `src/features/[name]/` with proper segments.
 3. **Write tests first** (TDD: RED → GREEN → REFACTOR).
 4. **Export public API** in `index.ts`.
 5. **Create route** in `src/app/dashboard/[name]/page.tsx`.
 6. **Add to navigation** in `src/shared/config/nav-config.ts`.
 
----
-
-## Verification (Before Declaring Done)
-
-1. **Self-review**: Re-read all changed files
-2. **Lint & Type**: `npm run lint:strict` + `npx tsc --noEmit`
-3. **Build**: `npm run build`
-4. **FSD imports**: No cross-layer import violations
-5. **Tests**: All acceptance criteria tests pass
-6. **SPEC check**: All items in `acceptance.md` satisfied
