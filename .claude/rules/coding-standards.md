@@ -28,6 +28,8 @@ globs: ["src/**"]
 
 - Always use `'use client'` directive when client interactivity is needed
 - Always use Promise for page.tsx params props (Next.js 15+ pattern)
+- React 19: `<script>`, `<Script>` 태그를 컴포넌트 트리에서 렌더링 금지
+- 로캘 의존 API (`toLocaleDateString`, `Intl.DateTimeFormat` 등)는 반드시 로캘 명시 (`'en-US'`)
 
 ## Hydration-Safe Pattern (Radix UI)
 
